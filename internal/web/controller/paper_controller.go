@@ -3,9 +3,9 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
-	"paperstore/internal/repo"
 	"net/http"
 	"net/url"
+	"paperstore/internal/repo"
 )
 
 func HandlePaper(w http.ResponseWriter, r *http.Request) {
