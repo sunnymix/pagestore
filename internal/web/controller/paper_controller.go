@@ -73,7 +73,9 @@ func HandlePapers(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if r.Method == "GET" {
-		res = findPagePapers()
+		query := getQuery(r, "query")
+
+		res = findPagePapers(query)
 	}
 
 	js, _ := json.Marshal(res)
@@ -82,10 +84,10 @@ func HandlePapers(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write(js)
 }
 
-func findPagePapers() *JsonResult {
+func findPagePapers(query string) *JsonResult {
 	res := &JsonResult{}
 
-	papers, err := repo.GlobalRepo.FindPage()
+	papers, err := repo.GlobalRepo.FindPage(query)
 	if err != nil {
 		res.Code = 1
 		res.Msg = fmt.Sprintf("find page papers error: %s", err)
