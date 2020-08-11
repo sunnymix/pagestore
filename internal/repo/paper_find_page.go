@@ -25,9 +25,12 @@ func (repo *Repo) FindPage(query string) (papers []*Paper, err error) {
 
 	size := int64(50)
 
+	sort := bson.M{"title": 1}
+
 	opts = &options.FindOptions{
 		Projection: projection,
 		Limit:      &size,
+		Sort:       sort,
 	}
 
 	cursor, err := repo.paper.Find(ctx, filter, opts)
