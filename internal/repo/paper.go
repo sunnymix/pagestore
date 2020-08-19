@@ -11,4 +11,5 @@ type Content struct {
 	Schema string `bson:"schema" json:"schema"`
 	Text   string `bson:"text" json:"text"`
 	Attach string `bson:"attach" json:"attach"`
+	Check  int    `bson:"check" json:"check"`
 }
