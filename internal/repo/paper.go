@@ -8,8 +8,9 @@ type Paper struct {
 }
 
 type Content struct {
-	Schema string `bson:"schema" json:"schema"`
-	Text   string `bson:"text" json:"text"`
-	Attach string `bson:"attach" json:"attach"`
-	Check  int    `bson:"check" json:"check"`
+	Schema   string `bson:"schema" json:"schema"`
+	Text     string `bson:"text" json:"text"`
+	Attach   string `bson:"attach" json:"attach"`
+	Check    int    `bson:"check" json:"check"`
+	Priority int    `bson:"priority" json:"priority"`
 }
