@@ -13,5 +13,6 @@ type Content struct {
 	Attach    string `bson:"attach" json:"attach"`
 	Check     int    `bson:"check" json:"check"`
 	Priority  int    `bson:"priority" json:"priority"`
+	Link      string `bson:"link" json:"link"`
 	Highlight int    `bson:"highlight" json:"highlight"`
 }
