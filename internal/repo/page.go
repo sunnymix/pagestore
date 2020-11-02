@@ -1,6 +1,6 @@
 package repo
 
-type Paper struct {
+type Page struct {
 	Pid     string    `bson:"pid" json:"pid"`
 	Title   string    `bson:"title" json:"title"`
 	Content []Content `bson:"content" json:"content"`

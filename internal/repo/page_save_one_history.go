@@ -4,7 +4,7 @@ import (
 	"context"
 )
 
-func (repo *Repo) SaveOneHistory(paper *Paper) (err error) {
+func (repo *Repo) SaveOneHistory(paper *Page) (err error) {
 	var (
 		ctx context.Context
 	)

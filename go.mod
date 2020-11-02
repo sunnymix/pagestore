@@ -1,4 +1,4 @@
-module paperstore
+module pagestore
 
 go 1.14
 

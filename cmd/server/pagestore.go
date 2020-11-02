@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"paperstore/internal/web"
+	"pagestore/internal/web"
 )
 
 var port = flag.Int("p", 8080, "port")

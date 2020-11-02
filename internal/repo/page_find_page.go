@@ -6,7 +6,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-func (repo *Repo) FindPage(query string) (papers []*Paper, err error) {
+func (repo *Repo) Query(query string) (pages []*Page, err error) {
 	var (
 		ctx        context.Context
 		filter     bson.M
@@ -33,13 +33,13 @@ func (repo *Repo) FindPage(query string) (papers []*Paper, err error) {
 		Sort:       sort,
 	}
 
-	cursor, err := repo.paper.Find(ctx, filter, opts)
+	cursor, err := repo.page.Find(ctx, filter, opts)
 
 	if err != nil {
 		return
 	}
 
-	_ = cursor.All(ctx, &papers)
+	_ = cursor.All(ctx, &pages)
 
 	return
 }

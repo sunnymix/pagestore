@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func (repo *Repo) SaveOne(paper *Paper) (err error) {
+func (repo *Repo) SaveOne(page *Page) (err error) {
 	var (
 		ctx    context.Context
 		filter bson.M
@@ -18,22 +18,22 @@ func (repo *Repo) SaveOne(paper *Paper) (err error) {
 	)
 
 	ctx = context.TODO()
-	filter = bson.M{"pid": paper.Pid}
+	filter = bson.M{"pid": page.Pid}
 
-	paper.Updated = time.Now().UTC().UnixNano() / 1000000
-	val = bson.M{"$set": paper}
+	page.Updated = time.Now().UTC().UnixNano() / 1000000
+	val = bson.M{"$set": page}
 
 	upsert = true
 	opts = &options.UpdateOptions{
 		Upsert: &upsert,
 	}
 
-	if _, err = repo.paper.UpdateOne(ctx, filter, val, opts); err != nil {
-		fmt.Printf("insert paper error: %s\n", err)
+	if _, err = repo.page.UpdateOne(ctx, filter, val, opts); err != nil {
+		fmt.Printf("insert page error: %s\n", err)
 		return
 	}
 
-	_ = repo.SaveOneHistory(paper)
+	_ = repo.SaveOneHistory(page)
 
 	return
 }

@@ -19,7 +19,7 @@ func (conn *Conn) ToString(driver string) string {
 
 func NewConn() (conn *Conn, err error) {
 	viper.SetConfigName("conn")
-	viper.AddConfigPath("/data/paperstore/config")
+	viper.AddConfigPath("/data/pagestore/config")
 	viper.SetConfigType("yaml")
 
 	if err = viper.ReadInConfig(); err != nil {
@@ -28,7 +28,7 @@ func NewConn() (conn *Conn, err error) {
 	}
 
 	viper.SetConfigName("conn-local")
-	viper.AddConfigPath("/data/paperstore/config")
+	viper.AddConfigPath("/data/pagestore/config")
 
 	if err = viper.MergeInConfig(); err != nil {
 		fmt.Printf("merge config error: %v", err)

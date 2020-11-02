@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"paperstore/cfg"
+	"pagestore/cfg"
 	"time"
 )
 
 type Repo struct {
 	client  *mongo.Client
-	paper   *mongo.Collection
+	page    *mongo.Collection
 	history *mongo.Collection
 }
 
@@ -26,7 +26,7 @@ func initRepo() {
 		opts              *options.ClientOptions
 		client            *mongo.Client
 		err               error
-		paperCollection   *mongo.Collection
+		pageCollection    *mongo.Collection
 		historyCollection *mongo.Collection
 	)
 
@@ -48,13 +48,13 @@ func initRepo() {
 		return
 	}
 
-	paperCollection = client.Database("paper").Collection("paper")
+	pageCollection = client.Database("page").Collection("page")
 
-	historyCollection = client.Database("paper").Collection("history")
+	historyCollection = client.Database("page").Collection("history")
 
 	GlobalRepo = &Repo{
 		client:  client,
-		paper:   paperCollection,
+		page:    pageCollection,
 		history: historyCollection,
 	}
 }

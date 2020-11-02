@@ -5,18 +5,18 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"paperstore/internal/repo"
+	"pagestore/internal/repo"
 )
 
-func HandlePaper(w http.ResponseWriter, r *http.Request) {
+func HandlePage(w http.ResponseWriter, r *http.Request) {
 	var (
 		res *JsonResult
 	)
 
 	if r.Method == "GET" {
-		res = findOnePaper(getQuery(r, "pid"))
+		res = findOnePage(getQuery(r, "pid"))
 	} else if r.Method == "POST" {
-		res = saveOnePaper(getBody(r))
+		res = saveOnePage(getBody(r))
 	} else if r.Method == "DELETE" {
 
 	}
@@ -36,13 +36,13 @@ func getQuery(r *http.Request, key string) (val string) {
 	return
 }
 
-func getBody(r *http.Request) *repo.Paper {
-	var res repo.Paper
+func getBody(r *http.Request) *repo.Page {
+	var res repo.Page
 	_ = json.NewDecoder(r.Body).Decode(&res)
 	return &res
 }
 
-func findOnePaper(pid string) *JsonResult {
+func findOnePage(pid string) *JsonResult {
 	res := &JsonResult{}
 
 	if len(pid) == 0 {
@@ -55,13 +55,13 @@ func findOnePaper(pid string) *JsonResult {
 	return res
 }
 
-func saveOnePaper(paper *repo.Paper) *JsonResult {
+func saveOnePage(page *repo.Page) *JsonResult {
 	res := &JsonResult{}
 
-	err := repo.GlobalRepo.SaveOne(paper)
+	err := repo.GlobalRepo.SaveOne(page)
 	if err != nil {
 		res.Code = 1
-		res.Msg = fmt.Sprintf("save paper error: %s", err)
+		res.Msg = fmt.Sprintf("save page error: %s", err)
 	}
 
 	return res
@@ -75,7 +75,7 @@ func HandlePapers(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		query := getQuery(r, "query")
 
-		res = findPagePapers(query)
+		res = queryPages(query)
 	}
 
 	js, _ := json.Marshal(res)
@@ -84,15 +84,15 @@ func HandlePapers(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write(js)
 }
 
-func findPagePapers(query string) *JsonResult {
+func queryPages(query string) *JsonResult {
 	res := &JsonResult{}
 
-	papers, err := repo.GlobalRepo.FindPage(query)
+	pages, err := repo.GlobalRepo.Query(query)
 	if err != nil {
 		res.Code = 1
-		res.Msg = fmt.Sprintf("find page papers error: %s", err)
+		res.Msg = fmt.Sprintf("Query pages error: %s", err)
 	} else {
-		res.Data = papers
+		res.Data = pages
 	}
 
 	return res
