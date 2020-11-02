@@ -1,1 +1,1 @@
-# paperstore
+# PageStore
