@@ -67,7 +67,7 @@ func saveOnePage(page *repo.Page) *JsonResult {
 	return res
 }
 
-func HandlePapers(w http.ResponseWriter, r *http.Request) {
+func HandlePages(w http.ResponseWriter, r *http.Request) {
 	var (
 		res *JsonResult
 	)
